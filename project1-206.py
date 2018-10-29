@@ -3,58 +3,242 @@ import filecmp
 from dateutil.relativedelta import *
 from datetime import date
 
+inFile = open("P1DataA.csv", "r")
+lines = inFile.readlines()
+inFile.close()
+dictList = []
+for line in lines:
+	line = line.rstrip()
+	student_dict = {}
+	values = line.split(",")
+	first_name = values[0]
+	last_name = values[1]
+	email = values[2]
+	year = values[3]
+	DOB = values[4]
+	student_dict["first_name"] = first_name
+	student_dict["last_name"] = last_name
+	student_dict["email"] = email
+	student_dict["year"] = year
+	student_dict["DOB"] = DOB
+	dictList.append(student_dict)
 
 def getData(file):
+	inFile = open(file, "r")
+	lines = inFile.readlines()
+	inFile.close()
+	dictList = []
+	for line in lines:
+		line = line.rstrip()
+		student_dict = {}
+		values = line.split(",")
+		first_name = values[0]
+		last_name = values[1]
+		email = values[2]
+		year = values[3]
+		DOB = values[4]
+		student_dict["first_name"] = first_name
+		student_dict["last_name"] = last_name
+		student_dict["email"] = email
+		student_dict["year"] = year
+		student_dict["DOB"] = DOB
+		dictList.append(student_dict)
+	print(student_dict)
+	return student_dict
 # get a list of dictionary objects from the file
 #Input: file name
 #Ouput: return a list of dictionary objects where
 #the keys are from the first row in the data. and the values are each of the other rows
-
-	pass
+getData("P1DataA.csv")
+getData("P1DataB.csv")
 
 def mySort(data,col):
+	hand = open(data, "r")
+	lines = hand.readlines()
+	hand.close()
+	dictList = []
+	for line in lines:
+		line = line.rstrip()
+		student_dict = {}
+		values = line.split(",")
+		first_name = values[0]
+		last_name = values[1]
+		email = values[2]
+		year = values[3]
+		DOB = values[4]
+		student_dict["first_name"] = first_name
+		student_dict["last_name"] = last_name
+		student_dict["email"] = email
+		student_dict["year"] = year
+		student_dict["DOB"] = DOB
+		dictList.append(student_dict)
+	keylist = student_dict.keys()
+	print(student_dict["first_name"], student_dict["last_name"])
+
 # Sort based on key/column
 #Input: list of dictionaries and col (key) to sort on
 #Output: Return the first item in the sorted list as a string of just: firstName lastName
 
-	pass
-
+mySort("P1DataA.csv", "firstName")
+getData("P1DataB.csv", "firstName")
 
 def classSizes(data):
+	hand = open(data, "r")
+	lines = hand.readlines()
+	hand.close()
+	dictList = []
+	yearDict = {}
+	yearDict['Freshman']: 0
+	yearDict['Sophomore']: 0
+	yearDict['Junior']: 0
+	yearDict['Senior']: 0
+	for line in lines:
+		line = line.rstrip()
+		student_dict = {}
+		values = line.split(",")
+		first_name = values[0]
+		last_name = values[1]
+		email = values[2]
+		year = values[3]
+		DOB = values[4]
+		student_dict["first_name"] = first_name
+		student_dict["last_name"] = last_name
+		student_dict["email"] = email
+		student_dict["year"] = year
+		student_dict["DOB"] = DOB
+		dictList.append(student_dict)
+		if student_dict["year"] == 'Freshman':
+			yearDict['Freshman'] +=1
+		elif student_dict['year'] == 'Sophomore':
+			yearDict['Sophomore'] +=1
+		elif student_dict['year'] == 'Junior':
+			yearDict['Junior'] += 1
+		else:
+			yearDict['Senior'] += 1
+	print(sorted(student_dict, key = lambda k: k[1], reverse=True))
+
 # Create a histogram
 # Input: list of dictionaries
 # Output: Return a list of tuples sorted by the number of students in that class in
 # descending order
 # [('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)]
 
-	pass
-
+classSizes(student_dict)
 
 def findMonth(a):
+	inFile = open(file, "r")
+	lines = inFile.readlines()
+	inFile.close()
+	x = {}
+	x['1'] = 0
+	x['2'] = 0
+	x['3'] = 0
+	x['4'] = 0
+	x['5'] = 0
+	x['6'] = 0
+	x['7'] = 0
+	x['8'] = 0
+	x['9'] = 0
+	x['10'] = 0
+	x['11'] = 0
+	x['12'] = 0
+	for line in lines:
+		line = line.rstrip()
+		values = line.split(',')
+		DOB = values[4]
+		splitDOB = DOB.split('/')
+		month = splitDOB[0]
+		for a in month:
+			if a == '1':
+				x['1'] = x['1'] + 1
+			elif a == "2":
+				x['2'] = x['2'] + 1
+			elif a == "3":
+				x['3'] = x['3'] + 1
+			elif a == "4":
+				x['4'] = x['4'] + 1
+			elif a == "5":
+				x['5'] = x['5'] + 1
+			elif a == "6":
+				x['6'] = x['6'] + 1
+			elif a == "7":
+				x['7'] = x['7'] + 1
+			elif a == "8":
+				x['8'] = x['8'] + 1
+			elif a == "9":
+				x['9'] = x['9'] + 1
+			elif a == "10":
+				x['10'] = x['10'] + 1
+			elif a == "11":
+				x['11'] = x['11'] + 1
+			else:
+				x['12'] = x['12'] + 1
+		sortedList = sorted(x, key=lambda k: month, reverse = True)
+		return sortedList[0]
+
 # Find the most common birth month form this data
 # Input: list of dictionaries
 # Output: Return the month (1-12) that had the most births in the data
-
-	pass
+findMonth(student_dict)
 
 def mySortPrint(a,col,fileName):
+	hand = open(fileName, "r")
+	lines = hand.readlines()
+	hand.close()
+	dictList = []
+	for line in lines:
+		line = line.rstrip()
+		student_dict = {}
+		values = line.split(",")
+		first_name = values[0]
+		last_name = values[1]
+		email = values[2]
+		year = values[3]
+		DOB = values[4]
+		student_dict["first_name"] = first_name
+		student_dict["last_name"] = last_name
+		student_dict["email"] = email
+		student_dict["year"] = year
+		student_dict["DOB"] = DOB
+		dictList.append(student_dict)
+	download_dict = 'mySortPrint.csv'
+	csv = open(download_dict, 'w')
+	columnTitleRow = "first, last, email\n"
+	csv.write(columnTitleRow)
+	for key in student_dict:
+		row = student_dict["first_name"] + student_dict["last_name"] + student_dict["email"]
+		csv.write(row)
 #Similar to mySort, but instead of returning single
 #Student, the sorted data is saved to a csv file.
 # as fist,last,email
 #Input: list of dictionaries, col (key) to sort by and output file name
 #Output: No return value, but the file is written
 
-	pass
+mySortPrint(student_dict, "first_name", "mySortPrint.csv")
 
 def findAge(a):
-# def findAge(a):
+	inFile = open(file, "r")
+	lines = inFile.readlines()
+	inFile.close()
+	current_year = 2018
+	age_list = []
+	for line in lines:
+		line = line.rstrip()
+		values = line.split(',')
+		DOB = values[4]
+		splitDOB = DOB.split('/')
+		year = splitDOB[2]
+		age = current_year - year
+		age_list.append(age)
+	avg = sum(age_list)/len(age_list)
+	return avg
+
+findAge(student_dict)
+
 # Input: list of dictionaries
 # Output: Return the average age of the students and round that age to the nearest
 # integer.  You will need to work with the DOB and the current date to find the current
 # age in years.
-
-	pass
-
 
 ################################################################
 ## DO NOT MODIFY ANY CODE BELOW THIS
